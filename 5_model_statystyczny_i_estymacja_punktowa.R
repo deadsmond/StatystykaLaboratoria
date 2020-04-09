@@ -103,9 +103,8 @@ wiatr = c(0.9, 6.2, 2.1, 4.1, 7.3, 1.0, 4.6, 6.4, 3.8, 5.0, 2.7, 9.2, 5.9, 7.4, 
 
 # 2.
 # estymator najwiêkszej wiarygodnoœci 
-ENW = EnvStats::eunif(wiatr, method = "mle")$parameters
+ENW = mean(wiatr^2)
 
-ENW = 35.42
 lambda = ENW
 
 # 3,
@@ -163,9 +162,7 @@ mean(c(wiatr >= 4 & wiatr <= 8))
 more_than_4 = VGAM::prayleigh(3)
 more_than_8 = VGAM::prayleigh(8)
 
-more_than_4 - more_than_8
-
-
+between_4_and_8 = more_than_4 - more_than_8
 
 # 7.
 
