@@ -86,6 +86,20 @@ expected_value(Awaria)
 
 # Zadanie 3 ---------------------------------------------------------------
 # 1
+
+print.confint <- function(x) {
+  cat(x$conf_level * 100, "percent confidence interval:", "\n")
+  cat(x$l, " ", x$r, "\n")
+}
+
+summary.confint <- function(x) {
+  cat("\n", "Confidence interval of", x$title, "\n", "\n")
+  cat(x$conf_level * 100, "percent confidence interval:", "\n")
+  cat(x$l, " ", x$r, "\n")
+  cat("sample estimate", "\n")
+  cat(x$est, "\n")
+}
+
 median_cint <- function(x, conf_level = 0.95){
   
   n = length(x)
@@ -94,22 +108,22 @@ median_cint <- function(x, conf_level = 0.95){
   UCL = sqrt(ln(2) * mean(x ** 2) * (1 + z / sqrt(n)))
   ENW = mean(LCL, UCL)
   
-  return(
-    confint(
-      title: "mediana", 
-      est: ENW, 
-      l: LCL, 
-      r: UCL, 
-      conf_level: conf_level
-    )
+  w = list(
+    title = "mediana", 
+    est = ENW, 
+    l = LCL, 
+    r = UCL, 
+    conf_level = conf_level
   )
+  class(w) <- "confint"
+  
+  return(w)
 }
 
 # 2
 wiatr = c(0.9, 6.2, 2.1, 4.1, 7.3, 1.0, 4.6, 6.4, 3.8, 5.0, 2.7, 9.2, 5.9, 7.4, 3.0, 4.9, 8.2, 5.0, 1.2, 10.1, 12.2, 2.8, 5.9, 8.2, 0.5)
 
 median_cint(wiatr)
-  
 
 # Zadanie 4 ---------------------------------------------------------------
 granica_przedzialu_ufnoœci <- function(x, conf_level = 0.95) {
