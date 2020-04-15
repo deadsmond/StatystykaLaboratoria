@@ -103,10 +103,10 @@ summary.confint <- function(x) {
 median_cint <- function(x, conf_level = 0.95){
   
   n = length(x)
-  z = qnorm(1 - conf_level / 2)
+  z = qnorm(1 - (1 - conf_level) / 2, 0, 1)
   LCL = sqrt(ln(2) * mean(x ** 2) * (1 - z / sqrt(n)))
   UCL = sqrt(ln(2) * mean(x ** 2) * (1 + z / sqrt(n)))
-  ENW = mean(LCL, UCL)
+  ENW = mean(c(LCL, UCL))
   
   w = list(
     title = "mediana", 
@@ -123,14 +123,37 @@ median_cint <- function(x, conf_level = 0.95){
 # 2
 wiatr = c(0.9, 6.2, 2.1, 4.1, 7.3, 1.0, 4.6, 6.4, 3.8, 5.0, 2.7, 9.2, 5.9, 7.4, 3.0, 4.9, 8.2, 5.0, 1.2, 10.1, 12.2, 2.8, 5.9, 8.2, 0.5)
 
-median_cint(wiatr)
+rez = median_cint(wiatr)
+print(rez)
+summary(rez)
 
 # Zadanie 4 ---------------------------------------------------------------
-granica_przedzialu_ufnoœci <- function(x, conf_level = 0.95) {
+# https://stats.idre.ucla.edu/r/modules/probabilities-and-distributions/
+granica_przedzia³u_ufnoœci_wartosci_oczekiwanej_rozk³adu_normalnego <- function(x, conf_level = 0.95) {
   n = length(x)
+  
+  enorm(x, conf.level = conf_level)
+  
+  LCL = 
+  
   LCL = max(x) / nthroot(1 - conf_level/2, n)
   UCL = max(x) / nthroot(conf_level/2, n)
   
   return(c(LCL, UCL))
 }
 
+granica_przedzia³u_ufnoœci_wartosci_oczekiwanej_rozk³adu_normalnego <- function(x, conf_level = 0.95) {
+  
+  u <- enorm(
+    x,
+    conf.level = conf_level
+  )
+
+  return(u)
+}
+
+norm <- rnorm(10)
+norm <- rnorm(50)
+norm <- rnorm(100)
+
+granica_przedzia³u_ufnoœci_wartosci_oczekiwanej_rozk³adu_normalnego(wiatr, 0.95)
