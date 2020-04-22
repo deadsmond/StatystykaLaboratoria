@@ -11,7 +11,7 @@ shapiro.test(x)$p.value
 
 mean(x)
 
-## [1] 0.2136555
+t.test(x, m = 870, alternative = 'less')$p.value
 
 # Zadanie 2 ---------------------------------------------------------------
 data_A = c(78.2, 78.5, 75.6, 78.5, 78.5, 77.4, 76.6)
@@ -63,6 +63,7 @@ mean(data_przed)
 mean(data_po)
 
 ## [1] 0.0003786878
+t.test(data_przed, data_po, alternative = 'less')$p.value
 
 
 # Zadanie 4 ---------------------------------------------------------------
@@ -92,7 +93,8 @@ mean(wzrost_m)
 
 mean(wzrost_k)
 
-## [1] 6.928802e-07
+t.test(wzrost_m, wzrost_k, alternative = 'greater')$p.value
+
 
 # Zadanie 5 ---------------------------------------------------------------
 
