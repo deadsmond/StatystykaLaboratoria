@@ -7,11 +7,12 @@
 # Zadanie 1 ---------------------------------------------------------------
 x <- c(862, 870, 876, 866, 871, 865, 861, 873, 871, 872)
 
-shapiro.test(x)$p.value
+shapiro.test(x)
 
 mean(x)
 
-t.test(x, m = 870, alternative = 'less')$p.value
+t.test(x, mu = 870, alternative = "less")$p.value
+
 
 # Zadanie 2 ---------------------------------------------------------------
 data_A = c(78.2, 78.5, 75.6, 78.5, 78.5, 77.4, 76.6)
@@ -41,6 +42,7 @@ mean(data_B)
 
 t.test(data_A, data_B, var.equal = TRUE, alternative = 'greater')$p.value
 
+
 # Zadanie 3 ---------------------------------------------------------------
 
 data_przed <- c(84, 87, 87, 90, 90, 90, 90, 93, 93, 96)
@@ -62,8 +64,7 @@ mean(data_przed)
 
 mean(data_po)
 
-## [1] 0.0003786878
-t.test(data_przed, data_po, alternative = 'less')$p.value
+t.test(data_po, data_przed, alternative = 'greater', paired = TRUE)$p.value
 
 
 # Zadanie 4 ---------------------------------------------------------------
@@ -88,6 +89,7 @@ var(wzrost_m)
 var(wzrost_k)
 
 var.test(wzrost_m, wzrost_k, var.equal = TRUE, alternative = 'greater')$p.value
+
 
 mean(wzrost_m)
 
