@@ -14,6 +14,7 @@ mean(x)
 t.test(x, mu = 870, alternative = "less")$p.value
 
 
+
 # Zadanie 2 ---------------------------------------------------------------
 data_A = c(78.2, 78.5, 75.6, 78.5, 78.5, 77.4, 76.6)
 data_B = c(76.1, 75.2, 75.8, 77.3, 77.3, 77.0, 74.4, 76.2, 73.5, 77.4)
@@ -41,7 +42,6 @@ mean(data_A)
 mean(data_B)
 
 t.test(data_A, data_B, var.equal = TRUE, alternative = 'greater')$p.value
-
 
 # Zadanie 3 ---------------------------------------------------------------
 
