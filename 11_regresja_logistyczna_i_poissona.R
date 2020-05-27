@@ -43,19 +43,41 @@ performance(pred_1, 'auc')@y.values
 
 # 6.
 
-data_new <- data.frame(
+liver_data_new <- data.frame(
   bilirubin = c(0.9, 2.1, 3.4),
   ldh = c(100, 200, 300)
 )
 
 predict_glm <- predict(
   model_1, 
-  data_new,
+  liver_data_new,
   type = 'response'
 )
 
+model_1_hat <- coef(model_1)[1] + coef(model_1)[2] * liver_data$bilirubin + coef(model_1)[3] * liver_data$ldh
+model_1_temp <- seq(min(model_1_hat) - 1, max(model_1_hat) + 2.5, length.out = 100)
+condition_temp <- exp(model_1_temp) / (1 + exp(model_1_temp))
+
+plot(
+  model_1_temp, 
+  condition_temp, 
+  type = "l", 
+  xlab = "X beta", 
+  ylab = "condition", 
+  xlim = c(-6, 9), 
+  ylim = c(-0.1, 1.1)
+)
+
+# górne czarne kropki
 points(
-  coef(model_1)[1] + coef(model_1)[2] * data_new$bilirubin + coef(model_1)[3] * data_new$ldh, 
+  model_1_hat, 
+  liver_data$condition, 
+  pch = 16
+)
+
+# czerwone kropki
+points(
+  coef(model_1)[1] + coef(model_1)[2] * liver_data_new$bilirubin + coef(model_1)[3] * liver_data_new$ldh, 
   predict_glm, 
   pch = 16, 
   col = "red"
