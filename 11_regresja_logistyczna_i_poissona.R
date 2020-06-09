@@ -1,4 +1,4 @@
-# Zajêcia 10 ####
+# Zajêcia 11 ####
 
 load(url("http://ls.home.amu.edu.pl/data_sets/liver_data.RData"))
 
