@@ -3,7 +3,16 @@
 load(url("http://ls.home.amu.edu.pl/data_sets/liver_data.RData"))
 
 # zadanie 1 ---------------------------------------------------------------
-# 1.
+# W jednym badaniu klinicznym oceniono wp³yw poziomów enzymu LDH i zmian
+# poziomów bilirubiny na zdrowie pacjentów z przewlek³ym zapaleniem w¹troby. Uzyskane
+# wyniki s¹ zawarte w pliku liver _data.RData. Zmienne to:
+# bilirubin - zmiana stê¿enia bilirubiny we krwi, 
+# ldh - stê¿enie enzymu LDH w ciele pacjenta, 
+# condition - zmiana stanu pacjenta ( Yes - pogorszenie, No - brak pogorszenia). 
+
+# 1. Dopasuj model regresji logistycznej do tych danych. Jakie s¹ wartoœci estymatorów
+# wspó³czynników regresji? 
+
 model_1 <- glm(
   formula=condition ~ bilirubin + ldh, 
   family = "binomial", 
@@ -11,18 +20,20 @@ model_1 <- glm(
 )
 model_1
 
-# 2.
+# 2. Które wspó³czynniki s¹ statystycznie istotne w skontruowanym modelu? Jakie jest
+# dopasowanie modelu?
+
 summary(model_1)
 
-# 3.
+# 3. Czy model ten mo¿e byæ zredukowany za pomoc¹ regresji krokowej? 
 step(model_1)
 
-# 4.
+# 4. Zinterpretuj wspó³czynniki modelu. 
 bilirubin <- exp(coef(model_1[1]))[2]
 
 ldh <- exp(coef(model_1[1]))[3]
 
-# 5.
+# 5. Narysuj krzyw¹ ROC i oblicz AUC dla modelu. 
 library(ROCR)
 pred_1 <- prediction(
   model_1$fitted.values, 
@@ -41,7 +52,9 @@ plot(
 # auc
 performance(pred_1, 'auc')@y.values
 
-# 6.
+# 6. Dokonaj przedykcji zmiennej condition dla trzech pacjentów scharakteryzonych
+# nastêpuj¹co: ( bilirubin , 1dh ) = (0.9, 100), (2.1, 200), (3.4, 300). 
+# Zilustruj wyniki na wykresie. 
 
 liver_data_new <- data.frame(
   bilirubin = c(0.9, 2.1, 3.4),
@@ -83,7 +96,11 @@ points(
   col = "red"
 )
 
-# 7.
+# 7. Powy¿szy wykres pokazuje, ¿e istniej¹ dwie obserwacje odstaj¹ce dla pacjentów z
+# pogorszeniem i jedna obserwacja odstaj¹ca dla pacjentów bez pogorszenia. Zidentyfikuj
+# je i wykonaj powy¿sz¹ analizê dla danych bez tych trzech wartoœci odstaj¹cych. Jak
+# zmieniaj¹ siê wyniki? 
+
 # 7.1
 # 7.2
 # 7.3
@@ -92,7 +109,12 @@ points(
 # 7.6
 
 # zadanie 2 ---------------------------------------------------------------
-# 1.
+# U¿yj modelu regresji Poissona do zestawu danych moths (wp³yw siedliska na
+# liczbê moli) z pakietu DAAG . U¿yj zlogarytmowanej zmiennej meters jako zmiennej
+# objaœniaj¹cej, a liczby moli A jako zmiennej objaœnianej. 
+
+# 1. Dopasuj model regresji Poissona do tych danych. Jakie s¹ wartoœci estymatorów
+# wspó³czynników regresji?
 
 # 2.
 

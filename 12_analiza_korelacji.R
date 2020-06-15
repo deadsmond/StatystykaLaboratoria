@@ -2,9 +2,12 @@
 
 
 # zadanie 1 ---------------------------------------------------------------
-# 1.
+# Zbiór danych mtcars zawiera dane dotycz¹ce pewnych cech samochodów.
+# Interesuje nas zbadanie korelacji miêdzy zmiennymi mpg oraz wg. 
 
 data = mtcars
+
+# 1. Wykonaj wykres rozrzutu dla badanych cech. 
 
 # wykres rozrzutu
 plot(

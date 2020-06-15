@@ -2,15 +2,23 @@
 
 
 # zadanie 1 ---------------------------------------------------------------
+# Zbiór danych w pliku Automobile.csv zawiera dane charakteryzuj¹ce ró¿ne typy samochodów.
+
 data = read.csv("Automobile.csv", na = "?")
 
 head(data)
 
-# 1
+# 1. W tym zestawie danych wystêpuj¹ braki danych. Usuñ wszystkie obserwacje, dla których
+# nie mamy pe³nych informacji o wszystkich zmiennych zawartych w zbiorze danych,
+# u¿ywaj¹c funkcji na.omit() . 
 
 data <- na.omit(data)
 
-# 2
+# 2.lnteresuje nas zbudowanie modelu opisuj¹cego cenê samochodów w zale¿noœci od
+# pewnych ich cech. WeŸmy pod uwagê nastêpuj¹ce zmienne: horsepower, city.mpg,
+# peak.rpm, curb.weight i num.of.doors jako zmienne niezale¿ne. 
+
+# Dopasuj model regresji liniowej do tych danych. 
 
 temp = subset(
   data, 

@@ -1,93 +1,122 @@
-#ANALIZA SK≈ÅADOWYCH G≈Å√ìWNYCH
+# ANALIZA SK£ADOWYCH G£”WNYCH
 
 # zadanie 1 ---------------------------------------------------------------
+# W powyøszym przyk≥adzie do analizy sk≥adowych g≥Ûwnych zosta≥y wykorzystane
+# wszystkie zmienne. Jednak jedna z nich jest bardzo s≥abo skorelowana z pozosta≥ymi. Ustal tÍ
+# zmiennπ, a nastÍpnie wykonaj poniøsze polecenia bez jej uzwglÍdnienia: 
 
 dane <- USArrests
 dane <- dane[,-3]
 
-#1.1
-#Przygotowanie danych do analizy
-var(dane)
-#Skalowanie
-dane_scale <- scale(dane)
+# 1. Dokonaj analizy sk≥adowych g≥Ûwnych.
 
+# Przygotowanie danych do analizy
+var(dane)
+
+# Skalowanie
+dane_scale <- scale(dane)
 var(dane_scale)
-#Analiza sk≈Çadowych g≈Ç√≥wnych
+
+# Analiza sk≥adowych g≥Ûwnych
 pca <- prcomp(dane, scale=TRUE)
 
-#1.2
-summary(pca)
-#procent wariancji - drugi wiersz
+# 2. Jaki procent wariancji ttumaczony jest przez poszczegÛlne sk≥adowe? 
 
-#1.3
-#wsp√≥≈Çrzƒôdne obserwacji
+summary(pca)
+# procent wariancji - drugi wiersz
+
+# 3. Wyznacz wspÛ≥rzÍdne obserwacji w nowym uk≥adzie wspÛ≥rzÍdnych utworzonym przez
+# sk≥adowe g≥Ûwne. 
+
+# wspÛ≥rzÍdne obserwacji
 head(pca$x)
 
-#1.4
-#interpretacja ≈Çadunk√≥w
-pca$rotation
-#wykres
-#???
+# 4. Dokonaj interpretacji ≥adunkÛw i zilustruj je na wykresie. 
 
-#1.5
-#wykres osypiska
+#interpretacja ≥adunkÛw
+pca$rotation
+
+# wykres
+# ???
+
+# 5. Narysuj wykres osypiska i zaproponuj optymalnπ liczbÍ sk≥adowych g≥Ûwnych w oparciu o
+# trzy kryteria. 
+
+# wykres osypiska
 plot(pca)
 
-#1.6
+# 6. Przedstaw stany w uk≥adzie dwÛch pierwszych sk≥adowych g≥Ûwnych (dok≥adniej narysuj
+# biplot i dokonaj jego interpretacji).
+
 biplot(pca)
 
-#1.7
-#drzewo rozpinajƒÖce
+# 7. Przedstaw stany za pomocπ minimalnego drzewa rozpinajπcego. 
+
+#drzewo rozpinajπce
 library(ape)
 plot(mst(dist(dane_scale)), x1 = pca$x[, 1], x2 = pca$x[, 2])
 
 # zadanie 2 ---------------------------------------------------------------
-#??
+# ZbiÛr danych mtcars zawiera informacje na temat 32 samochodÛw z roku 1974. 
 
 dane <- mtcars
+
+# 1. Dokonaj analizy sk≥adowych g≥Ûwnych biorπc pod uwagÍ cechy: 
+# mpg, disp, hp, drat, wt, qsec. 
 mtcars_sel <- mtcars[, c(1, 3:7)]
 
-#Analiza sk≈Çadowych g≈Ç√≥wnych
+# Analiza sk≥adowych g≥Ûwnych
 (pca_2 <- prcomp(mtcars_sel, scale = TRUE))
 dane_scale <- scale(mtcars_sel)
 
-#procent wariancji - drugi wiersz
+# 2. Jaki procent wariancji t≥umaczony jest przez poszczegÛlne sk≥adowe? 
+
+# procent wariancji - drugi wiersz
 summary(pca_2)
 
-#wsp√≥≈Çrzƒôdne obserwacji
+# 3. Wyznacz wspÛ≥rzÍdne obserwacji w nowym uk≥adzie wspÛ≥rzÍdnych utworzonym przez
+# sk≥adowe g≥Ûwne. 
+
 head(pca_2$x)
 
-#interpretacja ≈Çadunk√≥w
+# 4. Dokonaj interpretacji ≥adunkÛw i zilustruj je na wykresie.
+
 pca_2$rotation
 
-#wykres osypiska
-plot(pca_2)
+# 5. Narysuj wykres osypiska i zaproponuj optymalnπ liczbÍ sk≥adowych g≥Ûwnych w oparciu o trzy kryteria. 
+# ???
 
+# 6. Przedstaw samochody w uk≥adzie dwÛch pierwszych sk≥adowych g≥Ûwnych (dok≥adniej
+# narysuj biplot i dokonaj jego interpretacji). 
+
+plot(pca_2)
 biplot(pca_2)
 
-#drzewo rozpinajƒÖce
+# 7. Przedstaw samochody za pomocπ minimalnego drzewa rozpinajπcego.
 library(ape)
 plot(mst(dist(dane_scale)), x1 = pca_2$x[, 1], x2 = pca_2$x[, 2])
 
-#bez skalowania
-#Analiza sk≈Çadowych g≈Ç√≥wnych
+
+# 8. Jak bardzo bÍdπ rÛøni≥y siÍ wyniki, jeúli nie wykonamy skalowania danych? 
+
+# Analiza sk≥adowych g≥Ûwnych
 (pca_3 <- prcomp(mtcars_sel, scale = FALSE, center = FALSE))
 dane_scale <- scale(mtcars_sel)
 
-#procent wariancji - drugi wiersz
+# procent wariancji - drugi wiersz
 summary(pca_3)
 
-#wsp√≥≈Çrzƒôdne obserwacji
+# wspÛ≥rzÍdne obserwacji
 head(pca_3$x)
 
-#interpretacja ≈Çadunk√≥w
+# interpretacji ≥adunkÛw
 pca_3$rotation
 
-#wykres osypiska
+# wykres osypiska
 plot(pca_3)
 
 biplot(pca_3)
 
-#drzewo rozpinajƒÖce
+# drzewo rozpinajπce
 library(ape)
 plot(mst(dist(dane_scale)), x1 = pca_3$x[, 1], x2 = pca_3$x[, 2])
