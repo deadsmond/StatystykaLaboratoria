@@ -88,24 +88,27 @@ war.test = function(
   war0, 
   alt = c('two.sided', 'less', 'greater')
 ){
+  statistic = (length(x)-1)*var(x)/war0
   d = length(x) - 1
-  statistic = d * var(x) / war0
   alt = match.arg(alt)
   p.value = pchisq(statistic, d)
-  p.value = switch(
+  p.value = switch (
     alt, 
-    'two.sided' = 2 * min(p.value, 1-p.value),
-    'greater' = 1 - xxx,
-    'less' = xxx
+    'two.sided' = 2*min(p.value, 1-p.value), 
+    'greater' = 1 - p.value, 
+    'less' = p.value
   )
   names(statistic) = 'T'
   names(d) = 'num df'
   wynik = list(
-    statistic = statistic,
-    parameter = d,
-    p.value = p.value,
-    alternative = xxx
-  )
+    statistic = statistic, 
+    parameter = d, 
+    p.value = p.value, 
+    alternative = alt, 
+    method = 'Test istotno?ci dla wariacji w modelu normalnym', 
+    data.name = deparse(substitute(x))
+  ) #paste(deparse(substitute(x))))
+  
   class(wynik) = 'htest'
   return(wynik)
 }
